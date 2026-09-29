@@ -36,9 +36,16 @@ The system logically isolates offline machine learning pipeline generation from 
 
 The software architecture consists of four primary components:
 
-1. **ML Training & Pipeline Engine (`src/`):**
-   * Handles dataset ingestion, cleaning, feature transformation, model training, hyperparameter tuning, and evaluation.
-   * Exports a single, self-contained `scikit-learn` Pipeline artifact containing all fitted transformers and the trained classification model.
+1. **ML Training & Pipeline Engine:**
+   * Handles dataset ingestion, data validation, exploratory analysis,
+     feature transformation, model training, hyperparameter tuning,
+     evaluation, and model artifact generation.
+   * The exact internal directory/module structure will be established
+     incrementally during the ML implementation phases based on the
+     actual dataset and pipeline requirements.
+   * The training pipeline will eventually export a single,
+     self-contained scikit-learn Pipeline artifact containing the
+     fitted preprocessing transformers and selected classification model.
 
 2. **FastAPI REST Service (`backend/`):**
    * Acts as the interface between API clients / web frontend and the underlying prediction engine.
@@ -104,10 +111,11 @@ flowchart TD
 ```
 
 ### Risk Level Mapping Logic
-Raw probability outputs are mapped into actionable business risk levels:
-* **Low Risk:** Probability < 0.35
-* **Medium Risk:** 0.35 ≤ Probability < 0.70
-* **High Risk:** Probability ≥ 0.70
+Raw probability outputs are mapped into actionable business risk levels (Low, Medium, High). 
+
+* Risk-tier threshold boundaries will be determined after model evaluation and probability calibration.
+* Thresholds are business and configuration parameters rather than fixed architectural constants.
+* Final threshold choices will be justified empirically using model performance characteristics and business trade-off analysis.
 
 ---
 

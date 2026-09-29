@@ -60,7 +60,12 @@ Customer churn leads to lost revenue and increased acquisition costs. Organizati
 ## 6. Machine Learning Requirements
 
 * **Problem Formulation:** Supervised Binary Classification.
-* **Target Label:** `Churn` (1 = Churned, 0 = Retained).
+* **Target Label:**
+actual dataset target
+        ↓
+cleaned target representation
+        ↓
+0 / 1 mapping
 * **Candidate Algorithms:**
   1. Logistic Regression (Baseline)
   2. Decision Tree Classifier
